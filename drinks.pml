@@ -26,5 +26,7 @@ init {
 	run Machine() ; run Customer()
 }
 
+// `Machine@chosen` is set to true when the machine has finished serving a drink
+// i.e. a `coin` and a `press*` command was recieved
 ltl prop1 { <> Machine@chosen }
 
