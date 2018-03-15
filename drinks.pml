@@ -54,3 +54,6 @@ ltl q1d { [] <> Machine@chosen }
 // Checks if when a customer pays, a drink is eventually chosen
 ltl q1e { [] (Customer1@paid -> (<> Machine@chosen)) }
 
+// Checks if drink 1 is chosen infinitely often (doesn't evaluate to true)
+ltl q2a { [] <> (Machine@chosen && drink == 1) }
+
