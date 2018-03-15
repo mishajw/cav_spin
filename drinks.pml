@@ -57,3 +57,6 @@ ltl q1e { [] (Customer1@paid -> (<> Machine@chosen)) }
 // Checks if drink 1 is chosen infinitely often (doesn't evaluate to true)
 ltl q2a { [] <> (Machine@chosen && drink == 1) }
 
+// Used to show a cycle where drink 1 is chosen infinitely often
+ltl q2b { <> [] !(Machine@chosen && drink == 1) }
+
