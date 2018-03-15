@@ -19,7 +19,7 @@ proctype Machine() {
 
 proctype Customer1() {
 	do :: true
-		c ! coin ;
+		paid: c ! coin ;
 		c ! press1 ;
 		c ? serve
 	od
@@ -50,4 +50,7 @@ ltl prop1 { <> Machine@chosen }
 
 // Checks if a drink is chosen infinitely often
 ltl q1d { [] <> Machine@chosen }
+
+// Checks if when a customer pays, a drink is eventually chosen
+ltl q1e { [] (Customer1@paid -> (<> Machine@chosen)) }
 
