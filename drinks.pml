@@ -17,7 +17,7 @@ proctype Machine() {
 	od
 }
 
-proctype Customer() {
+proctype Customer1() {
 	do :: true
 		c ! coin ;
 		c ! press1 ;
@@ -25,8 +25,23 @@ proctype Customer() {
 	od
 }
 
+// We don't have to put a mutex on `Machine` to stop the two customers from
+// using the machine simultaneously because `Machine` passes through three
+// states none of which can be interrupted by the other customer before the
+// transaction is finished
+proctype Customer2() {
+	do :: true
+    c ! coin
+    if
+      :: c ! press2
+      :: c ! press3
+    fi
+    c ? serve
+	od
+}
+
 init {
-	run Machine() ; run Customer()
+	run Machine() ; run Customer1() ; run Customer2()
 }
 
 // `Machine@chosen` is set to true when the machine has finished serving a drink
