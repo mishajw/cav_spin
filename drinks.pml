@@ -33,3 +33,6 @@ init {
 // i.e. a `coin` and a `press*` command was recieved
 ltl prop1 { <> Machine@chosen }
 
+// Checks if a drink is chosen infinitely often
+ltl q1d { [] <> Machine@chosen }
+
