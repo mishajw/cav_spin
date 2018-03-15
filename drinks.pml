@@ -26,7 +26,5 @@ init {
 	run Machine() ; run Customer()
 }
 
-#define a (Machine@chosen)
-
-ltl prop1 { <> a }
+ltl prop1 { <> Machine@chosen }
 
