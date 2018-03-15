@@ -1,4 +1,4 @@
-mtype = { coin, press1, press2, serve };
+mtype = { coin, press1, press2, press3, serve };
 
 int drink = 0;
 chan c = [0] of { mtype };
@@ -9,6 +9,9 @@ proctype Machine() {
 		if
       :: c ? press1 ; drink = 1
       :: c ? press2 ; drink = 2
+      // If drink 3 is chosen, non-deterministically chose drink 2 or 3
+      :: c ? press3 ; drink = 2
+      :: c ? press3 ; drink = 3
 		fi ;
 		chosen: c ! serve
 	od
