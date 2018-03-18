@@ -30,13 +30,17 @@ proctype Customer1() {
 // states none of which can be interrupted by the other customer before the
 // transaction is finished
 proctype Customer2() {
+  int num_coins = 5
 	do :: true
-    c ! coin
-    if
-      :: c ! press2
-      :: c ! press3
+    if :: num_coins > 0 ->
+      c ! coin
+      paid: num_coins = num_coins - 1
+      if
+        :: c ! press2
+        :: c ! press3
+      fi
+      c ? serve
     fi
-    c ? serve
 	od
 }
 
