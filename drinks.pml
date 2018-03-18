@@ -60,3 +60,6 @@ ltl q2a { [] <> (Machine@chosen && drink == 1) }
 // Used to show a cycle where drink 1 is chosen infinitely often
 ltl q2b { <> [] !(Machine@chosen && drink == 1) }
 
+// Used to show a cycle where both customers pay infinitely often
+ltl q3a { (<> [] !Customer1@paid) || (<> [] !Customer2@paid) }
+
