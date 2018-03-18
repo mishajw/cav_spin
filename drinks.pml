@@ -23,11 +23,15 @@ proctype Customer1() {
   int num_coins = CUSTOMER_BUDGET;
 	do :: true
     if
+    // Either buy a drink...
     :: num_coins > 0 ->
+      // Pay for the drink
       c ! coin;
       paid: num_coins = num_coins - 1;
+      // Always request drink 1
       c ! press1;
       c ? serve;
+    // ..or recieve a coin from `Customer2`
     ::
       coin_chan ? 1;
       num_coins = num_coins + 1;
@@ -43,14 +47,18 @@ proctype Customer2() {
   int num_coins = CUSTOMER_BUDGET
 	do :: true
     if
+    // Either buy a drink...
     :: num_coins > 0 ->
+      // Pay for the drink
       c ! coin;
       paid: num_coins = num_coins - 1;
       if
+        // Either request drink 2 or 3
         :: c ! press2;
         :: c ! press3;
       fi
       c ? serve
+    // ...or send a coin to `Customer1`
     :: num_coins > 0 ->
       coin_chan ! 1;
       num_coins = num_coins - 1;
